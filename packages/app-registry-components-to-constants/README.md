@@ -22,6 +22,41 @@ to verify it worked.
 If you don't see this command as a part of your React Native CLI, make sure it's either a dependency or dev dependency of your
 project.
 
+## Running
+
+In order to generate constants, you have to run this command from your project root
+
+```bash
+$ react-native app-registry-components-to-constants ./index.js ./ios/HelloWorld
+```
+
+Once execution finishes, check `ios/HelloWorld` folder for newly created files. They will look similar to the following two samples, with different set of modules located in your case:
+
+RNConstants.h
+```objc
+// This file has been auto-generated. Do not modify.
+
+extern NSString * const FOO_MODULE
+extern NSString * const BAR_MODULE
+```
+
+RNConstants.m
+```objc
+// This file has been auto-generated. Do not modify.
+
+NSString* const FOO_MODULE = @"foo";
+
+NSString* const BAR_MODULE = @"bar";
+```
+
+The above two files were generated from the following `index.js` file:
+```js
+import { AppRegistry } from 'react-native';
+
+AppRegistry.registerComponent("foo", () => ...);
+AppRegistry.registerComponent("bar", () => ...);
+```
+
 ## Integrating with Xcode
 
 By default this command generates two files, `RNConstants.h` and `RNConstants.m`. The name can be changed by providing `--name` option when executing.
@@ -38,3 +73,4 @@ compiling.
 - [ ] Automatically link newly created files instead of letting users to do so manually
 - [ ] Support Android
 - [ ] Provide out-of-the-box solution for running from Xcode
+- [ ] Make destination optional, it's accessible from `rnpm` config
