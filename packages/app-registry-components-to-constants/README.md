@@ -8,7 +8,7 @@ app-registry-components-to-constants
 Run the following command from within your React Native project:
 
 ```bash
-$ yarn add react-native app-registry-components-to-constants
+$ yarn add react-native-app-registry-components-to-constants
 ```
 
 then, 
