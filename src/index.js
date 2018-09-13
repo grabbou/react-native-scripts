@@ -17,7 +17,7 @@ const parser = require('@babel/parser');
 const { default: traverse } = require('@babel/traverse');
 
 if (process.argv.length !== 5) {
-	console.log(dedent`
+  console.log(dedent`
     Too few arguments.
 
     This command expects three arguments in the following order:
@@ -29,53 +29,53 @@ if (process.argv.length !== 5) {
      ./test/fixtures/file.js ~/Desktop RNConstants
 	`);
 
-	process.exit(1);
+  process.exit(1);
 }
 
 const [sourcePath, destination, name] = process.argv.slice(2);
 
 const code = fs.readFileSync(sourcePath, {
-	encoding: 'utf8',
+  encoding: 'utf8',
 });
 
 const ast = parser.parse(code, {
-	plugins: ['jsx', 'flow'],
+  plugins: ['jsx', 'flow'],
 });
 
 const availableModules = [];
 
 traverse(ast, {
-	MemberExpression({ node, parent }) {
-		if (
-			`${node.object.name}.${node.property.name}` ===
-			'AppRegistry.registerComponent'
-		) {
-			availableModules.push({
-				name: `${constantCase(parent.arguments[0].value)}_MODULE`,
-				value: parent.arguments[0].value,
-			});
-		}
-	},
+  MemberExpression({ node, parent }) {
+    if (
+      `${node.object.name}.${node.property.name}` ===
+      'AppRegistry.registerComponent'
+    ) {
+      availableModules.push({
+        name: `${constantCase(parent.arguments[0].value)}_MODULE`,
+        value: parent.arguments[0].value,
+      });
+    }
+  },
 });
 
 fs.writeFileSync(
-	`${destination}/${name}.h`,
-	`
+  `${destination}/${name}.h`,
+  `
 // This file has been auto-generated. Do not modify.
 
 ${availableModules
-		.map(module => `extern NSString * const ${module.name}`)
-		.join('\n\n')}
+    .map(module => `extern NSString * const ${module.name}`)
+    .join('\n\n')}
 `
 );
 
 fs.writeFileSync(
-	`${destination}/${name}.m`,
-	`
+  `${destination}/${name}.m`,
+  `
 // This file has been auto-generated. Do not modify.
 
 ${availableModules
-		.map(module => `NSString* const ${module.name} = @"${module.value}";`)
-		.join('\n\n')}
+    .map(module => `NSString* const ${module.name} = @"${module.value}";`)
+    .join('\n\n')}
 `
 );
