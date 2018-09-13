@@ -14,7 +14,7 @@ $ yarn add react-native-app-registry-components-to-constants
 then, 
 
 ```bash
-$ react-native-app-registry-components-to-constants --help
+$ react-native app-registry-components-to-constants --help
 ```
 
 to verify it worked. 
@@ -27,7 +27,7 @@ project.
 In order to generate constants, you have to run this command from your project root
 
 ```bash
-$ react-native-app-registry-components-to-constants ./index.js ./ios/HelloWorld
+$ react-native app-registry-components-to-constants ./index.js ./ios/HelloWorld
 ```
 
 Once execution finishes, check `ios/HelloWorld` folder for newly created files. They will look similar to the following two samples, with different set of modules located in your case:
