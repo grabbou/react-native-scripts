@@ -5,21 +5,7 @@ react-native-scripts
 
 ## Available scripts
 
-Please see the list below for a full breakdown of available scripts.
+### app-registry-components-to-constants
 
-### register-react-native-modules
+Provides type-safety when referring to modules that `RCTRootView` should load. Referring to a module name that hasn't been registered on the Javascript side will result in a compile-time error.
 
-> Provides type-safety when loading modules registered inside React Native app
-
-By running the following command:
-
-```bash
-$ yarn run register-react-native-modules ./index.js ./ RNConstants
-```
-
-the script will generate two files, `RNConstants.h` and `RNConstants.m` that contain constants describing
-available modules from the Javascript side.
-
-This script should be run automatically every time you run your app. Please see the next section for details on how to set it up.
-
-#### Integration with XCode

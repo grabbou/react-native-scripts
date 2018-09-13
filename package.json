@@ -1,27 +1,4 @@
 {
-  "name": "rn-scripts",
-  "version": "1.0.0",
-  "description": "Provides type-safety when loading modules registered inside React Native app",
-  "bin": {
-    "register-react-native-modules": "src/index.js"
-  },
-  "author": "Mike Grabowski <grabbou@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/parser": "^7.0.0",
-    "@babel/traverse": "^7.0.0",
-    "camelcase": "^5.0.0",
-    "constant-case": "^2.0.0",
-    "dedent": "^0.7.0"
-  },
-  "devDependencies": {
-    "@callstack/eslint-config": "^2.0.0",
-    "eslint": "^5.5.0"
-  },
-  "eslintConfig": {
-    "extends": "@callstack",
-    "rules": {
-      "no-console": 0
-    }
-  }
+  "private": true,
+  "workspaces": ["packages/*"]
 }
